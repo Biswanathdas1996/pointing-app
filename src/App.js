@@ -9,12 +9,7 @@ import PointingPoker from "./components/PointingPoker/index";
 import CreateSession from "./components/PointingPoker/CreateSession";
 import { _fetch, _account } from "./ABI-connect/MessangerABI/connect";
 
-type contextType = {
-  account: string;
-  fetchUserData?: () => void;
-};
-
-export const AccountContext: React.Context<contextType> = createContext({
+export const AccountContext = createContext({
   account: "",
 });
 
