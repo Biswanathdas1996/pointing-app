@@ -42,12 +42,12 @@ const Register = () => {
   const saveData = async ({ title }) => {
     setStart(true);
 
-    const results = await client.add(file);
+    // const results = await client.add(file);
 
-    const imgLink = IpfsViewLink(results.path);
+    // const imgLink = IpfsViewLink(results.path);
 
     const uid = uuid();
-    await _transction("addUser", uid, title, imgLink);
+    await _transction("addUser", uid, title, "");
     localStorage.setItem("uid", encode(uid));
     fetchUserData();
     swal({
