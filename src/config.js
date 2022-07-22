@@ -13,8 +13,8 @@ export const InfuraProjectId = `24022fda545f41beb59334bdbaf3ef32`;
 
 export const InfuraNodeURL = `https://${Network}.infura.io/v3/${InfuraProjectId}`;
 
-export const IpfsViewLink = (fingerprint: string) =>
+export const IpfsViewLink = (fingerprint) =>
   `https://ipfs.infura.io/ipfs/${fingerprint}`;
 
-export const ViewTransctionDetailsLink = (transactionHash: string) =>
+export const ViewTransctionDetailsLink = (transactionHash) =>
   `https://${Network}.etherscan.io/tx/${transactionHash}`;
