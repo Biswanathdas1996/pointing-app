@@ -3,17 +3,17 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Card, Grid } from "@mui/material";
 import { _transction } from "../ABI-connect/MessangerABI/connect";
-import { create } from "ipfs-http-client";
+// import { create } from "ipfs-http-client";
 import { useNavigate } from "react-router-dom";
 import TransctionModal from "../components/shared/TransctionModal";
 
-import { IPFSLink, IpfsViewLink } from "../config";
+// import { IPFSLink, IpfsViewLink } from "../config";
 import uuid from "uuid/v4";
 import swal from "sweetalert";
 import { AccountContext } from "../App";
 import { encode } from "js-base64";
 
-const client = create(IPFSLink);
+// const client = create(IPFSLink);
 
 const VendorSchema = Yup.object().shape({
   title: Yup.string().required("Name is required"),
@@ -22,7 +22,7 @@ const VendorSchema = Yup.object().shape({
 const Register = () => {
   const [start, setStart] = useState(false);
   const [response, setResponse] = useState(null);
-  const [file, setFile] = useState(null);
+  // const [file, setFile] = useState(null);
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
   const { fetchUserData } = useContext(AccountContext);
@@ -72,7 +72,7 @@ const Register = () => {
   };
 
   const onFileChange = (event) => {
-    setFile(event.target.files[0]);
+    // setFile(event.target.files[0]);
     setSelectedFile(event.target.files[0]);
   };
 
