@@ -71,7 +71,7 @@ const Register = () => {
                           style={{ marginLeft: 10, marginTop: 10 }}
                         >
                           <label htmlFor="title" className="my-2">
-                            Privet Key <span className="text-danger">*</span>
+                            Private Key <span className="text-danger">*</span>
                           </label>
                           <Field
                             type="text"
