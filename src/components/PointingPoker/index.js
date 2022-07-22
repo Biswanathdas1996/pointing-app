@@ -62,14 +62,14 @@ export default function UserList() {
     const getCurrentStatus =
       getAllpointingData &&
       getAllpointingData?.find((value) => value?.status === true);
-    console.log("---session===>", getCurrentStatus);
+    // console.log("---session===>", getCurrentStatus);
     setSession(getCurrentStatus);
     const account = await _account();
     validateUser(account);
     setAccount(account);
 
     const getUserAllInputs = await _fetch("getUserAllInputs");
-    console.log("-------->", getUserAllInputs);
+    // console.log("-------->", getUserAllInputs);
     const filterInputforCurrentSession = getUserAllInputs?.filter(
       (inputVal) => inputVal?.title === getCurrentStatus?.title
     );
