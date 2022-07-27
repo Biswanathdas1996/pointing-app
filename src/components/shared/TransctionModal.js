@@ -189,13 +189,23 @@ export default function TransctionModal({ response, modalClose }) {
                 <Button
                   variant="contained"
                   onClick={(e) => handleClose()}
-                  style={{ marginTop: 20 }}
+                  style={{ marginTop: 20, float: "right" }}
                 >
                   Close
                 </Button>
               </>
             ) : (
-              <CircularProgress style={{ marginTop: 30 }} />
+              <center>
+                <CircularProgress style={{ marginTop: 30 }} />
+                <br />
+                <Button
+                  variant="contained"
+                  onClick={(e) => handleClose()}
+                  style={{ marginTop: 20, float: "right" }}
+                >
+                  Close
+                </Button>
+              </center>
             )}
           </center>
         </div>

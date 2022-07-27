@@ -291,7 +291,7 @@ export default function UserList() {
         color="primary"
         aria-label="add"
         style={{
-          position: "absolute",
+          position: "fixed",
           bottom: 50,
           right: 50,
         }}

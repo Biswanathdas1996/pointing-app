@@ -5,12 +5,28 @@ import ADDRESS from "./Address.json";
 import { WalletPrivateKey, InfuraNodeURL } from "../../config";
 import { decode } from "js-base64";
 
-const web3 = new Web3(new Web3.providers.HttpProvider(InfuraNodeURL));
-const signer = web3.eth.accounts.privateKeyToAccount(WalletPrivateKey);
-web3.eth.accounts.wallet.add(signer);
-const contract = new web3.eth.Contract(ABI, ADDRESS);
+// const web3 = new Web3(new Web3.providers.HttpProvider(InfuraNodeURL));
+const web3 = new Web3(InfuraNodeURL);
+
+export const _create_new_account = async () => {
+  const account = await web3.eth.accounts.create();
+  return account;
+};
 
 export const _transction = async (service, ...props) => {
+  const uid =
+    localStorage.getItem("uid") && decode(localStorage.getItem("uid"));
+  let signer;
+  let contract;
+  if (uid) {
+    signer = web3.eth.accounts.privateKeyToAccount(uid);
+    web3.eth.accounts.wallet.add(signer);
+    contract = new web3.eth.Contract(ABI, ADDRESS);
+  } else {
+    signer = web3.eth.accounts.privateKeyToAccount(WalletPrivateKey);
+    web3.eth.accounts.wallet.add(signer);
+    contract = new web3.eth.Contract(ABI, ADDRESS);
+  }
   const callService = _.get(contract, ["methods", service]);
 
   const tx = callService(...props);
@@ -36,6 +52,20 @@ export const _transction = async (service, ...props) => {
 };
 
 export const _paid_transction = async (cost, service, ...props) => {
+  const uid =
+    localStorage.getItem("uid") && decode(localStorage.getItem("uid"));
+  let signer;
+  let contract;
+  if (uid) {
+    signer = web3.eth.accounts.privateKeyToAccount(uid);
+    web3.eth.accounts.wallet.add(signer);
+    contract = new web3.eth.Contract(ABI, ADDRESS);
+  } else {
+    signer = web3.eth.accounts.privateKeyToAccount(WalletPrivateKey);
+    web3.eth.accounts.wallet.add(signer);
+    contract = new web3.eth.Contract(ABI, ADDRESS);
+  }
+
   const callService = _.get(contract, ["methods", service]);
 
   const responseData = await callService(...props)
@@ -61,6 +91,19 @@ export const _account = async () => {
 };
 
 export const _fetch = async (service, ...props) => {
+  const uid =
+    localStorage.getItem("uid") && decode(localStorage.getItem("uid"));
+  let signer;
+  let contract;
+  if (uid) {
+    signer = web3.eth.accounts.privateKeyToAccount(uid);
+    web3.eth.accounts.wallet.add(signer);
+    contract = new web3.eth.Contract(ABI, ADDRESS);
+  } else {
+    signer = web3.eth.accounts.privateKeyToAccount(WalletPrivateKey);
+    web3.eth.accounts.wallet.add(signer);
+    contract = new web3.eth.Contract(ABI, ADDRESS);
+  }
   const callService = _.get(contract, ["methods", service]);
   let data;
   if (props) {

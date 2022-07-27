@@ -2,13 +2,16 @@ import React, { useState, useEffect, useContext } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Card, Grid } from "@mui/material";
-import { _transction } from "../ABI-connect/MessangerABI/connect";
+import {
+  _transction,
+  _create_new_account,
+} from "../ABI-connect/MessangerABI/connect";
 // import { create } from "ipfs-http-client";
 import { useNavigate } from "react-router-dom";
 import TransctionModal from "../components/shared/TransctionModal";
 
 // import { IPFSLink, IpfsViewLink } from "../config";
-import uuid from "uuid/v4";
+
 import swal from "sweetalert";
 import { AccountContext } from "../App";
 import { encode } from "js-base64";
@@ -39,19 +42,21 @@ const Register = () => {
     return () => URL.revokeObjectURL(objectUrl);
   }, [selectedFile]);
 
-  const saveData = async ({ title }) => {
+  const saveData = async ({ title, key }) => {
+    const newAccoutnt = await _create_new_account();
+    console.log("-----new--->", newAccoutnt);
+
     setStart(true);
 
     // const results = await client.add(file);
 
     // const imgLink = IpfsViewLink(results.path);
 
-    const uid = uuid();
-    await _transction("addUser", uid, title, "");
-    localStorage.setItem("uid", encode(uid));
+    await _transction("addUser", key, title, "");
+    localStorage.setItem("uid", encode(key));
     fetchUserData();
     swal({
-      title: `${uid}`,
+      title: `${key}`,
       text: "Please note your privet key",
       icon: "success",
       buttons: true,
@@ -121,6 +126,28 @@ const Register = () => {
                             name="title"
                             autoComplete="flase"
                             placeholder="Enter title"
+                            className={`form-control text-muted ${
+                              touched.title && errors.title ? "is-invalid" : ""
+                            }`}
+                            style={{ marginRight: 10, padding: 9 }}
+                          />
+                        </div>
+                      </Grid>
+                      {/* // Wallet privet key */}
+                      <Grid item lg={6} md={6} sm={12} xs={12}>
+                        <div
+                          className="form-group"
+                          style={{ marginLeft: 10, marginTop: 10 }}
+                        >
+                          <label htmlFor="title" className="my-2">
+                            Wallet Privetkey{" "}
+                            <span className="text-danger">*</span>
+                          </label>
+                          <Field
+                            type="text"
+                            name="key"
+                            autoComplete="flase"
+                            placeholder="Enter key"
                             className={`form-control text-muted ${
                               touched.title && errors.title ? "is-invalid" : ""
                             }`}
